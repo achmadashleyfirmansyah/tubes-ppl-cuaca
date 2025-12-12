@@ -112,7 +112,7 @@ function getWeatherDescription($code) {
         85 => ['desc' => 'Hujan Salju Ringan', 'icon' => '🌨️'],
         86 => ['desc' => 'Hujan Salju Lebat', 'icon' => '❄️'],
         95 => ['desc' => 'Badai Petir', 'icon' => '⛈️'],
-        96 => ['desc' => 'Badai dengan Hujan Es', 'icon' => '⛈️'],
+        96 => ['desc' => 'Badai Hujan Es', 'icon' => '⛈️'],
         99 => ['desc' => 'Badai Petir Kuat', 'icon' => '⛈️']
     ];
     
