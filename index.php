@@ -61,6 +61,16 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <nav class="navbar">
+    <div class="navbar-logo">
+        🌤️ WeatherInfo
+    </div>
+    <div class="navbar-menu">
+        <a href="index.php" class="<?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>">Cuaca</a>
+        <a href="news.php" class="<?= basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : '' ?>">Berita</a>
+    </div>
+    </nav>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prakiraan Cuaca - <?php echo htmlspecialchars($locationName); ?></title>
@@ -461,7 +471,33 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
                 flex-direction: column;
                 gap: 20px;
             }
+        } 
+                .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
         }
+
+        .navbar-logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            padding-bottom: 4px;
+        }
+
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
+            border-bottom: 2px solid white;
+        }
+        
     </style>
 </head>
 <body>
