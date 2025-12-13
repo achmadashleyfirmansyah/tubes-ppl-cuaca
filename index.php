@@ -61,55 +61,52 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<nav class="navbar">
-    <div class="navbar-logo">
-        🌤️ WeatherInfo
+<nav class="topbar">
+    <div class="topbar-left">
+        <div class="brand">
+            ☁️ <span>Cuaca Indonesia</span>
+        </div>
+
+        <ul class="menu-pill">
+            <li>
+                <a href="index.php" class="active">
+                    <i class="fas fa-house"></i> Beranda
+                </a>
+            </li>
+            <li>
+                <a href="prakiraan.php">
+                    <i class="fas fa-calendar-days"></i> Prakiraan
+                </a>
+            </li>
+            <li>
+                <a href="peta.php">
+                    <i class="fas fa-map"></i> Peta
+                </a>
+            </li>
+            <li>
+                <a href="detail.php">
+                    <i class="fas fa-circle-info"></i> Detail
+                </a>
+            </li>
+            <li>
+                <a href="news.php">
+                    <i class="fas fa-newspaper"></i> Berita
+                </a>
+            </li>
+            <li>
+                <a href="pengaturan.php">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
+            <li>
+                <a href="bantuan.php">
+                    <i class="fas fa-question-circle"></i> Bantuan
+                </a>
+            </li>
+        </ul>
     </div>
+</nav>
 
-    <ul class="navbar-menu">
-        <li>
-            <a href="index.php" class="<?= basename($_SERVER['PHP_SELF'])=='index.php'?'active':'' ?>">
-                Cuaca
-            </a>
-            <ul class="dropdown">
-                <li><a href="index.php#today">Hari Ini</a></li>
-                <li><a href="index.php#hourly">Per Jam</a></li>
-                <li><a href="index.php#weekly">7 Hari</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">Peta</a>
-            <ul class="dropdown">
-                <li><a href="#">Peta Cuaca</a></li>
-                <li><a href="#">Curah Hujan</a></li>
-                <li><a href="#">Angin</a></li>
-                <li><a href="#">Suhu</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">Udara</a>
-            <ul class="dropdown">
-                <li><a href="#">Kualitas Udara</a></li>
-                <li><a href="#">Polusi</a></li>
-                <li><a href="#">Indeks UV</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">Peringatan</a>
-            <ul class="dropdown">
-                <li><a href="#">Hujan Lebat</a></li>
-                <li><a href="#">Badai & Petir</a></li>
-                <li><a href="#">Gelombang Panas</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="about.php">Tentang</a>
-        </li>
-    </ul>
 </nav>
 
     <meta charset="UTF-8">
@@ -513,87 +510,54 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
                 gap: 20px;
             }
         } 
-        .navbar {
+
+                .menu-pill li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.12);
+            color: white;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .menu-pill li a:hover {
+            background: rgba(255,255,255,0.22);
+        }
+
+        .menu-pill li a.active {
+            background: #ffc107;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+
+                .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 80px;
             background: linear-gradient(135deg, #4facfe, #00f2fe);
-            position: sticky;
-            top: 0;
-            z-index: 999;
+            color: white;
         }
 
         .navbar-logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-        }
-
-        .navbar-menu {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
-
-        .navbar-menu li {
-            position: relative;
         }
 
         .navbar-menu a {
             color: white;
             text-decoration: none;
-            padding: 8px 0;
-            display: block;
+            margin-left: 30px;
+            padding-bottom: 4px;
         }
 
-        .navbar-menu a.active,
-        .navbar-menu a:hover {
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
             border-bottom: 2px solid white;
         }
-
-        /* Dropdown */
-        .dropdown {
-            position: absolute;
-            top: 35px;
-            left: 0;
-            background: white;
-            min-width: 180px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: none;
-            overflow: hidden;
-        }
-
-        .dropdown li a {
-            color: #333;
-            padding: 12px 15px;
-            font-size: 14px;
-        }
-
-        .dropdown li a:hover {
-            background: #f0f4ff;
-        }
-
-        /* Show dropdown */
-        .navbar-menu li:hover .dropdown {
-            display: block;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 30px;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar-menu {
-                flex-wrap: wrap;
-                gap: 15px;
-                margin-top: 10px;
-            }
-        }
-
         
     </style>
 </head>
