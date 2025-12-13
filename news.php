@@ -14,8 +14,6 @@ $data = $news['events'] ?? [];
 /* ===== STYLE KHUSUS NEWS ===== */
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: #333;
 }
@@ -112,14 +110,66 @@ body {
     border-radius: 14px;
     margin-bottom: 15px;
 }
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+}
+
+.navbar-logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    padding-bottom: 6px;
+    font-size: 15px;
+}
+
+.navbar-menu a:hover,
+.navbar-menu a.active {
+    border-bottom: 2px solid white;
+}
+
+/* tombol kembali */
+.back-btn {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.35);
+}
+.container {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 30px;
+}
 
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h2 class="page-title">🌍 Bencana Alam Global</h2>
+<div class="navbar">
+    <div class="navbar-logo">
+        🌤️ Info Cuaca & Bencana
+    </div>
+
+    <div class="navbar-menu">
+        <a href="index.php">Home</a>
+        <a href="news.php" class="active">Berita Bencana</a>
+        <a href="index.php" class="back-btn">⬅ Kembali</a>
+    </div>
+</div>
 
     <div class="card-grid">
         <?php if (empty($data)): ?>
