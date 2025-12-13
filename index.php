@@ -61,15 +61,56 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <nav class="navbar">
+<nav class="navbar">
     <div class="navbar-logo">
         🌤️ WeatherInfo
     </div>
-    <div class="navbar-menu">
-        <a href="index.php" class="<?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>">Cuaca</a>
-        <a href="news.php" class="<?= basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : '' ?>">Berita</a>
-    </div>
-    </nav>
+
+    <ul class="navbar-menu">
+        <li>
+            <a href="index.php" class="<?= basename($_SERVER['PHP_SELF'])=='index.php'?'active':'' ?>">
+                Cuaca
+            </a>
+            <ul class="dropdown">
+                <li><a href="index.php#today">Hari Ini</a></li>
+                <li><a href="index.php#hourly">Per Jam</a></li>
+                <li><a href="index.php#weekly">7 Hari</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#">Peta</a>
+            <ul class="dropdown">
+                <li><a href="#">Peta Cuaca</a></li>
+                <li><a href="#">Curah Hujan</a></li>
+                <li><a href="#">Angin</a></li>
+                <li><a href="#">Suhu</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#">Udara</a>
+            <ul class="dropdown">
+                <li><a href="#">Kualitas Udara</a></li>
+                <li><a href="#">Polusi</a></li>
+                <li><a href="#">Indeks UV</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#">Peringatan</a>
+            <ul class="dropdown">
+                <li><a href="#">Hujan Lebat</a></li>
+                <li><a href="#">Badai & Petir</a></li>
+                <li><a href="#">Gelombang Panas</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="about.php">Tentang</a>
+        </li>
+    </ul>
+</nav>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -472,31 +513,87 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
                 gap: 20px;
             }
         } 
-                .navbar {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 80px;
             background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 999;
         }
 
         .navbar-logo {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
+        }
+
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-menu li {
+            position: relative;
         }
 
         .navbar-menu a {
             color: white;
             text-decoration: none;
-            margin-left: 30px;
-            padding-bottom: 4px;
+            padding: 8px 0;
+            display: block;
         }
 
-        .navbar-menu a:hover,
-        .navbar-menu a.active {
+        .navbar-menu a.active,
+        .navbar-menu a:hover {
             border-bottom: 2px solid white;
         }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: white;
+            min-width: 180px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            overflow: hidden;
+        }
+
+        .dropdown li a {
+            color: #333;
+            padding: 12px 15px;
+            font-size: 14px;
+        }
+
+        .dropdown li a:hover {
+            background: #f0f4ff;
+        }
+
+        /* Show dropdown */
+        .navbar-menu li:hover .dropdown {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 30px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-menu {
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-top: 10px;
+            }
+        }
+
         
     </style>
 </head>
