@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 class FileTypeTest extends TestCase
 {
     private $projectFiles = [
-        'index.php'
+        'index.php','news.php',
     ];
 
     public function test_files_exist()

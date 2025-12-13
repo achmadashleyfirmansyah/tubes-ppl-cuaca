@@ -125,4 +125,43 @@ function getWindDirection($degrees) {
     $index = round($degrees / 45) % 8;
     return $directions[$index];
 }
+define('DISASTER_NEWS_API', 'https://eonet.gsfc.nasa.gov/api/v3/events');
+
+function getDisasterNews($limit = 10) {
+    $url = DISASTER_NEWS_API . "?limit={$limit}&status=open";
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_TIMEOUT => 15
+    ]);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    return json_decode($response, true);
+}
+function formatDisaster($title) {
+    $titleLower = strtolower($title);
+
+    if (strpos($titleLower, 'fire') !== false) {
+        return ['type' => 'Kebakaran', 'image' => 'fire.jpg'];
+    }
+    if (strpos($titleLower, 'flood') !== false) {
+        return ['type' => 'Banjir', 'image' => 'flood.jpg'];
+    }
+    if (strpos($titleLower, 'earthquake') !== false) {
+        return ['type' => 'Gempa Bumi', 'image' => 'earthquake.jpg'];
+    }
+    if (strpos($titleLower, 'storm') !== false || strpos($titleLower, 'cyclone') !== false) {
+        return ['type' => 'Badai', 'image' => 'storm.jpg'];
+    }
+    if (strpos($titleLower, 'volcano') !== false) {
+        return ['type' => 'Letusan Gunung', 'image' => 'volcano.jpg'];
+    }
+
+    return ['type' => 'Bencana Alam', 'image' => 'disaster.jpg'];
+}
+
 ?>
