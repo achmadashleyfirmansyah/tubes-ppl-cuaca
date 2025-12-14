@@ -58,6 +58,9 @@ for ($i = 0; $i < 7; $i++) {
 // Nama hari dalam Bahasa Indonesia
 $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 ?>
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -69,37 +72,37 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
         <ul class="menu-pill">
             <li>
-                <a href="index.php" class="active">
+                <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
                     <i class="fas fa-house"></i> Beranda
                 </a>
             </li>
             <li>
-                <a href="prakiraan.php">
+                <a href="prakiraan.php" class="<?= $currentPage == 'prakiraan.php' ? 'active' : '' ?>">
                     <i class="fas fa-calendar-days"></i> Prakiraan
                 </a>
             </li>
             <li>
-                <a href="peta.php">
+                <a href="peta.php" class="<?= $currentPage == 'peta.php' ? 'active' : '' ?>">
                     <i class="fas fa-map"></i> Peta
                 </a>
             </li>
             <li>
-                <a href="detail.php">
+                <a href="detail.php" class="<?= $currentPage == 'detail.php' ? 'active' : '' ?>">
                     <i class="fas fa-circle-info"></i> Detail
                 </a>
             </li>
             <li>
-                <a href="news.php">
+                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
                     <i class="fas fa-newspaper"></i> Berita
                 </a>
             </li>
             <li>
-                <a href="pengaturan.php">
+                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
                     <i class="fas fa-cog"></i> Pengaturan
                 </a>
             </li>
             <li>
-                <a href="bantuan.php">
+                <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
                     <i class="fas fa-question-circle"></i> Bantuan
                 </a>
             </li>
@@ -114,6 +117,56 @@ $hariIndo = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
     <title>Prakiraan Cuaca - <?php echo htmlspecialchars($locationName); ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .topbar {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-pill {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            padding: 6px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 40px;
+        }
+
+        .menu-pill li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .menu-pill li a:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+        .menu-pill li a.active {
+             background: #ffc107;
+                color: #1e3c72;
+                font-weight: bold;
+        }
+
         * {
             margin: 0;
             padding: 0;
