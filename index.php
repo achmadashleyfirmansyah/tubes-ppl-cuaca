@@ -64,6 +64,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <nav class="topbar">
     <div class="topbar-left">
         <div class="brand">
@@ -127,7 +128,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             align-items: center;
             gap: 30px;
         }
-
+                #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,.4);
+        }
         .brand {
             font-size: 22px;
             font-weight: bold;
@@ -706,7 +713,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </div>
             </div>
 
-            <div class="map-placeholder">
+            <div id="map"></div>
                 <div>
                     <i class="fas fa-map" style="font-size: 48px; margin-bottom: 15px;"></i>
                     <p>Peta Cuaca Interaktif</p>
@@ -958,5 +965,40 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             });
         }
     </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Inisialisasi map
+    const map = L.map('map').setView(
+        [<?= $latitude ?>, <?= $longitude ?>],
+        7
+    );
+
+    // Tile OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Marker lokasi
+    const marker = L.marker([<?= $latitude ?>, <?= $longitude ?>]).addTo(map);
+
+    marker.bindPopup(`
+        <strong><?= addslashes($locationName) ?></strong><br>
+        Suhu: <?= $currentTemp ?>°C<br>
+        <?= addslashes($weatherInfo['desc']) ?>
+    `).openPopup();
+
+    // Klik map untuk pindah lokasi
+    map.on('click', function(e) {
+        const lat = e.latlng.lat.toFixed(4);
+        const lon = e.latlng.lng.toFixed(4);
+
+        if (confirm('Lihat cuaca di lokasi ini?')) {
+            window.location.href =
+                `index.php?lat=${lat}&lon=${lon}&location=Koordinat ${lat}, ${lon}`;
+        }
+    });
+</script>
+
 </body>
 </html>
