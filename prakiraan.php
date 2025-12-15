@@ -50,7 +50,57 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
+            <style>
+                .topbar {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-pill {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            padding: 6px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 40px;
+        }
+
+        .menu-pill li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .menu-pill li a:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+        .menu-pill li a.active {
+            background: #ffc107;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
             background: linear-gradient(135deg, #1e3c72, #2a5298);
@@ -145,6 +195,32 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     </style>
 </head>
 <body>
+<nav class="topbar">
+    <div class="topbar-left">
+        <div class="brand">
+            <i class="fas fa-cloud-sun"></i>
+            Cuaca.ID
+        </div>
+
+        <ul class="menu-pill">
+            <li>
+                <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
+                    <i class="fas fa-house"></i> Home
+                </a>
+            </li>
+            <li>
+                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
+                    <i class="fas fa-newspaper"></i> News
+                </a>
+            </li>
+            <li>
+                <a href="prakiraan.php" class="<?= $currentPage == 'prakiraan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-calendar-days"></i> Prakiraan
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <div class="container">
 

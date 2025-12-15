@@ -3,10 +3,14 @@ require 'config.php';
 $news = getDisasterNews(8);
 $data = $news['events'] ?? [];
 ?>
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <meta charset="UTF-8">
 <title>Berita Bencana Global</title>
 
@@ -110,33 +114,6 @@ body {
     border-radius: 14px;
     margin-bottom: 15px;
 }
-/* ===== NAVBAR ===== */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 50px;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    color: white;
-}
-
-.navbar-logo {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.navbar-menu a {
-    color: white;
-    text-decoration: none;
-    margin-left: 30px;
-    padding-bottom: 6px;
-    font-size: 15px;
-}
-
-.navbar-menu a:hover,
-.navbar-menu a.active {
-    border-bottom: 2px solid white;
-}
 
 /* tombol kembali */
 .back-btn {
@@ -153,23 +130,110 @@ body {
     margin: 40px auto;
     padding: 0 30px;
 }
+/* ===== TOPBAR (SAMA DENGAN INDEX) ===== */
+.topbar {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+}
+
+.menu-pill {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 40px;
+}
+
+.menu-pill li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.menu-pill li a:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+.menu-pill li a.active {
+    background: #ffc107;
+    color: #1e3c72;
+    font-weight: bold;
+}
+
 
 </style>
 </head>
 
 <body>
+<nav class="topbar">
+    <div class="topbar-left">
+        <div class="brand">
+            ☁️ <span>Cuaca Indonesia</span>
+        </div>
 
-<div class="navbar">
-    <div class="navbar-logo">
-        🌤️ Info Cuaca & Bencana
+        <ul class="menu-pill">
+            <li>
+                <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
+                    <i class="fas fa-house"></i> Beranda
+                </a>
+            </li>
+            <li>
+                <a href="prakiraan.php" class="<?= $currentPage == 'prakiraan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-calendar-days"></i> Prakiraan
+                </a>
+            </li>
+            <li>
+                <a href="peta.php" class="<?= $currentPage == 'peta.php' ? 'active' : '' ?>">
+                    <i class="fas fa-map"></i> Peta
+                </a>
+            </li>
+            <li>
+                <a href="detail.php" class="<?= $currentPage == 'detail.php' ? 'active' : '' ?>">
+                    <i class="fas fa-circle-info"></i> Detail
+                </a>
+            </li>
+            <li>
+                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
+                    <i class="fas fa-newspaper"></i> Berita
+                </a>
+            </li>
+            <li>
+                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
+            <li>
+                <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-question-circle"></i> Bantuan
+                </a>
+            </li>
+        </ul>
     </div>
+</nav>
 
-    <div class="navbar-menu">
-        <a href="index.php">Home</a>
-        <a href="news.php" class="active">Berita Bencana</a>
-        <a href="index.php" class="back-btn">⬅ Kembali</a>
-    </div>
-</div>
+
 
     <div class="card-grid">
         <?php if (empty($data)): ?>
