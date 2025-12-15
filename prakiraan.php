@@ -198,24 +198,43 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <nav class="topbar">
     <div class="topbar-left">
         <div class="brand">
-            <i class="fas fa-cloud-sun"></i>
-            Cuaca.ID
+            ☁️ <span>Cuaca Indonesia</span>
         </div>
 
         <ul class="menu-pill">
             <li>
                 <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
-                    <i class="fas fa-house"></i> Home
-                </a>
-            </li>
-            <li>
-                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
-                    <i class="fas fa-newspaper"></i> News
+                    <i class="fas fa-house"></i> Beranda
                 </a>
             </li>
             <li>
                 <a href="prakiraan.php" class="<?= $currentPage == 'prakiraan.php' ? 'active' : '' ?>">
                     <i class="fas fa-calendar-days"></i> Prakiraan
+                </a>
+            </li>
+            <li>
+                <a href="peta.php" class="<?= $currentPage == 'peta.php' ? 'active' : '' ?>">
+                    <i class="fas fa-map"></i> Peta
+                </a>
+            </li>
+            <li>
+                <a href="detail.php" class="<?= $currentPage == 'detail.php' ? 'active' : '' ?>">
+                    <i class="fas fa-circle-info"></i> Detail
+                </a>
+            </li>
+            <li>
+                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
+                    <i class="fas fa-newspaper"></i> Berita
+                </a>
+            </li>
+            <li>
+                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
+            <li>
+                <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-question-circle"></i> Bantuan
                 </a>
             </li>
         </ul>
