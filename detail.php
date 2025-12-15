@@ -27,6 +27,8 @@ if (isset($_GET['lat']) && isset($_GET['lon'])) {
 $weather = getWeatherData($lat, $lon);
 $current = $weather['current'];
 $hourly  = $weather['hourly'];
+$daily = $weather['daily'];
+
 
 /* =============================
    Data utama
@@ -163,10 +165,49 @@ h2 {
     <div class="chart-box">
         <canvas id="rainChart"></canvas>
     </div>
+    <h3 style="margin-top:40px">Prakiraan Harian</h3>
+
+    <div class="detail-grid">
+    <?php for ($i=0; $i<5; $i++): 
+        $d = getWeatherDescription($daily['weather_code'][$i]);
+    ?>
+        <div class="card">
+            <span><?= date('l, d M', strtotime($daily['time'][$i])) ?></span>
+            <strong><?= $d['icon'] ?> <?= $d['desc'] ?></strong>
+            <small>
+                🌡️ <?= $daily['temperature_2m_min'][$i] ?>° /
+                <?= $daily['temperature_2m_max'][$i] ?>°
+            </small><br>
+            <small>🌧️ <?= $daily['precipitation_probability_max'][$i] ?>%</small>
+        </div>
+    <?php endfor; ?>
+    </div>
+
 </div>
 
 <script>
 const labels = <?= json_encode(array_map(fn($t)=>date('H:i', strtotime($t)), $labels)) ?>;
+
+const commonOptions = {
+    responsive: true,
+    plugins: {
+        legend: {
+            labels: {
+                color: '#ffffff'
+            }
+        }
+    },
+    scales: {
+        x: {
+            ticks: { color: '#ffffff' },
+            grid: { color: 'rgba(255,255,255,0.1)' }
+        },
+        y: {
+            ticks: { color: '#ffffff' },
+            grid: { color: 'rgba(255,255,255,0.1)' }
+        }
+    }
+};
 
 new Chart(document.getElementById('tempChart'), {
     type: 'line',
@@ -175,10 +216,11 @@ new Chart(document.getElementById('tempChart'), {
         datasets: [{
             label: 'Suhu (°C)',
             data: <?= json_encode($temp) ?>,
-            tension: 0.4,
-            borderWidth: 2
+            borderWidth: 2,
+            tension: 0.4
         }]
-    }
+    },
+    options: commonOptions
 });
 
 new Chart(document.getElementById('rainChart'), {
@@ -189,9 +231,11 @@ new Chart(document.getElementById('rainChart'), {
             label: 'Peluang Hujan (%)',
             data: <?= json_encode($rain) ?>
         }]
-    }
+    },
+    options: commonOptions
 });
 </script>
+
 
 </body>
 </html>
