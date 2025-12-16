@@ -41,62 +41,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <style>
-        .topbar {
-            width: 100%;
-            margin-bottom: 25px;
-        }
-        
-        .topbar-left {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-                #map {
-            width: 100%;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,.4);
-        }
-        .brand {
-            font-size: 22px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .menu-pill {
-            list-style: none;
-            display: flex;
-            gap: 10px;
-            padding: 6px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 40px;
-        }
-
-        .menu-pill li a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: 30px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.25s;
-        }
-
-        .menu-pill li a:hover {
-            background: rgba(255,255,255,0.18);
-        }
-
-        .menu-pill li a.active {
-             background: #ffc107;
-                color: #1e3c72;
-                font-weight: bold;
-        }
-
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -157,6 +101,79 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             #map { height: 400px; }
             .map-info { flex-direction: column; text-align: center; }
         }
+        .search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-box button {
+    padding: 12px 18px;
+    border-radius: 30px;
+    border: none;
+    background: #ffc107;
+    cursor: pointer;
+    font-weight: bold;
+}
+.topbar {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-pill {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 40px;
+}
+
+.menu-pill li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.menu-pill li a:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+.menu-pill li a.active {
+    background: #ffc107;
+    color: #1e3c72;
+    font-weight: bold;
+}
+
     </style>
 </head>
 <body>
@@ -214,6 +231,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <div class="subtitle">
         Lokasi: <strong><?= htmlspecialchars($locationName); ?></strong>
     </div>
+        <div class="search-box">
+    <input type="text" id="searchLocation" placeholder="Cari kota atau lokasi...">
+    <button onclick="searchLocation()">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
 
     <!-- MAP -->
     <div id="map"></div>
@@ -231,6 +254,54 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+function searchLocation() {
+    const query = document.getElementById('searchLocation').value;
+    if (!query) return alert('Masukkan nama lokasi');
+
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.length === 0) {
+                alert('Lokasi tidak ditemukan');
+                return;
+            }
+
+            const lat = data[0].lat;
+            const lon = data[0].lon;
+            const name = data[0].display_name;
+
+            window.location.href =
+                `peta.php?lat=${lat}&lon=${lon}&location=${encodeURIComponent(name)}`;
+        })
+        .catch(() => alert('Gagal mencari lokasi'));
+}
+</script>
+<script>
+    const map = L.map('map').setView([<?= $latitude; ?>, <?= $longitude; ?>], 7);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let marker = L.marker([<?= $latitude; ?>, <?= $longitude; ?>]).addTo(map);
+
+    marker.bindPopup(`
+        <strong><?= addslashes($locationName); ?></strong><br>
+        Suhu: <?= $currentTemp; ?>°C<br>
+        <?= addslashes($weatherInfo['desc']); ?>
+    `).openPopup();
+
+    // 🔥 KLIK PETA TANPA POPUP
+    map.on('click', function(e) {
+        const lat = e.latlng.lat.toFixed(4);
+        const lon = e.latlng.lng.toFixed(4);
+
+        // update URL & reload HALAMAN PETA
+        window.location.href =
+            `peta.php?lat=${lat}&lon=${lon}&location=Koordinat ${lat}, ${lon}`;
+    });
+</script>
 
 <script>
     // Inisialisasi peta
@@ -256,8 +327,16 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         const lon = e.latlng.lng.toFixed(4);
 
         if (confirm('Lihat cuaca di lokasi ini?')) {
-            window.location.href =
-                `index.php?lat=${lat}&lon=${lon}&location=Koordinat ${lat}, ${lon}`;
+            map.on('click', function(e) {
+    const lat = e.latlng.lat.toFixed(4);
+    const lon = e.latlng.lng.toFixed(4);
+
+    if (confirm('Lihat cuaca di lokasi ini?')) {
+        window.location.href =
+            `peta.php?lat=${lat}&lon=${lon}&location=Koordinat ${lat}, ${lon}`;
+    }
+});
+
         }
     });
 </script>
