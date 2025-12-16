@@ -1,0 +1,10 @@
+{
+    "auto_location": "1",
+    "default_city": "Kediri, Jawa Timur",
+    "latitude": "-7.8167",
+    "longitude": "112.0167",
+    "temperature_unit": "c",
+    "theme": "dark",
+    "forecast_days": "7",
+    "cache_time": "15"
+}
