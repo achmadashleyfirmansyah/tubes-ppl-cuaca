@@ -181,6 +181,26 @@ body {
     color: #1e3c72;
     font-weight: bold;
 }
+/* Paksa warna teks di dalam card */
+.card {
+    color: #111; /* default hitam */
+}
+
+/* Lokasi */
+.card-location {
+    color: #374151 !important; /* abu gelap */
+}
+
+/* Tanggal */
+.card-date {
+    color: #1f2937 !important; /* hampir hitam */
+}
+
+/* Emoji icon */
+.card-location .icon,
+.card-date .icon {
+    color: #1e3c72; /* biru gelap biar kontras */
+}
 
 
 </style>
