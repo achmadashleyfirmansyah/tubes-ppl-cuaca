@@ -41,6 +41,62 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <style>
+        .topbar {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+                #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,.4);
+        }
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-pill {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            padding: 6px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 40px;
+        }
+
+        .menu-pill li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .menu-pill li a:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+        .menu-pill li a.active {
+             background: #ffc107;
+                color: #1e3c72;
+                font-weight: bold;
+        }
+
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -104,6 +160,51 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     </style>
 </head>
 <body>
+<nav class="topbar">
+    <div class="topbar-left">
+        <div class="brand">
+            ☁️ <span>Cuaca Indonesia</span>
+        </div>
+
+        <ul class="menu-pill">
+            <li>
+                <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
+                    <i class="fas fa-house"></i> Beranda
+                </a>
+            </li>
+            <li>
+                <a href="prakiraan.php" class="<?= $currentPage == 'prakiraan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-calendar-days"></i> Prakiraan
+                </a>
+            </li>
+            <li>
+                <a href="peta.php" class="<?= $currentPage == 'peta.php' ? 'active' : '' ?>">
+                    <i class="fas fa-map"></i> Peta
+                </a>
+            </li>
+            <li>
+                <a href="detail.php" class="<?= $currentPage == 'detail.php' ? 'active' : '' ?>">
+                    <i class="fas fa-circle-info"></i> Detail
+                </a>
+            </li>
+            <li>
+                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
+                    <i class="fas fa-newspaper"></i> Berita
+                </a>
+            </li>
+            <li>
+                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
+            <li>
+                <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-question-circle"></i> Bantuan
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <div class="container">
 
