@@ -1,4 +1,11 @@
 <?php
+session_start();
+$unitSuhu   = $_SESSION['unit_suhu'] ?? 'celsius';
+$autoLokasi = $_SESSION['auto_lokasi'] ?? true;
+$tema       = $_SESSION['tema'] ?? 'biru';
+$notifikasi = $_SESSION['notifikasi'] ?? true;
+
+
 require_once 'config.php';
 
 // Auto-detect lokasi jika tidak ada parameter
@@ -25,6 +32,30 @@ if (!isset($_GET['lat']) && !isset($_GET['lon'])) {
 
 // Ambil data cuaca
 $weatherData = getWeatherData($latitude, $longitude);
+if ($autoLokasi && !isset($_GET['lat'])) {
+    $ip = getLocationFromIP();
+    if ($ip) {
+        $latitude = $ip['latitude'];
+        $longitude = $ip['longitude'];
+        $locationName = $ip['location'];
+    }
+}
+$temp = $weatherData['current']['temperature_2m'];
+
+if ($unitSuhu === 'fahrenheit') {
+    $temp = ($temp * 9/5) + 32;
+}
+$alert = null;
+if ($notifikasi) {
+    if ($weatherData['current']['wind_speed_10m'] > 40) {
+        $alert = "⚠️ Angin kencang terdeteksi";
+    }
+    if ($weatherData['current']['precipitation'] > 10) {
+        $alert = "⚠️ Hujan lebat berpotensi terjadi";
+    }
+}
+
+
 
 // Cek jika data cuaca valid
 if (!$weatherData || !isset($weatherData['current'])) {
@@ -657,6 +688,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <div class="temp-icon"><?php echo $weatherInfo['icon']; ?></div>
                     <div class="temp-value"><?php echo $currentTemp; ?>°C</div>
                 </div>
+                <div class="temp-value">
+                    <?= round($temp,1) ?>°<?= $unitSuhu=='celsius'?'C':'F' ?>
+                </div>
+                <?php if ($alert): ?>
+                <div class="alert-banner"><?= $alert ?></div>
+                <?php endif; ?>
+
+
 
                 <div class="weather-desc-main"><?php echo $weatherInfo['desc']; ?></div>
                 <div class="feels-like">Terasa seperti <?php echo $feelsLike; ?>°</div>

@@ -28,6 +28,9 @@ $weather = getWeatherData($lat, $lon);
 $current = $weather['current'];
 $hourly  = $weather['hourly'];
 $daily = $weather['daily'];
+$labels = array_slice($hourly['time'], 0, 12);
+$temp   = array_slice($hourly['temperature_2m'], 0, 12);
+$rain   = array_slice($hourly['precipitation_probability'], 0, 12);
 
 
 /* =============================
@@ -161,7 +164,6 @@ h2 {
     <div class="chart-box">
         <canvas id="tempChart"></canvas>
     </div>
-
     <div class="chart-box">
         <canvas id="rainChart"></canvas>
     </div>
@@ -233,6 +235,30 @@ new Chart(document.getElementById('rainChart'), {
         }]
     },
     options: commonOptions
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const commonOptions = {
+    plugins:{legend:{labels:{color:'#fff'}}},
+    scales:{
+        x:{ticks:{color:'#fff'},grid:{color:'rgba(255,255,255,.1)'}},
+        y:{ticks:{color:'#fff'},grid:{color:'rgba(255,255,255,.1)'}}
+    }
+};
+
+new Chart(tempChart,{
+    type:'line',
+    data:{labels:<?=json_encode($labels)?>,
+    datasets:[{label:'Suhu',data:<?=json_encode($temp)?>}]},
+    options:commonOptions
+});
+
+new Chart(rainChart,{
+    type:'bar',
+    data:{labels:<?=json_encode($labels)?>,
+    datasets:[{label:'Peluang Hujan',data:<?=json_encode($rain)?>}]},
+    options:commonOptions
 });
 </script>
 
