@@ -715,9 +715,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
             <div id="map"></div>
                 <div>
-                    <i class="fas fa-map" style="font-size: 48px; margin-bottom: 15px;"></i>
-                    <p>Peta Cuaca Interaktif</p>
-                    <p style="font-size: 14px; margin-top: 10px;">Fitur peta akan segera hadir</p>
+                    
                 </div>
             </div>
         </div>
