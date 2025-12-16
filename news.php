@@ -13,11 +13,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <meta charset="UTF-8">
 <title>Berita Bencana Global</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== STYLE KHUSUS NEWS ===== */
 
 body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: #333;
 }
@@ -144,7 +145,7 @@ body {
 
 .brand {
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -169,7 +170,8 @@ body {
     color: white;
     text-decoration: none;
     font-size: 14px;
-    transition: 0.25s;
+    font-weight: 500;
+    transition: all 0.25s ease;
 }
 
 .menu-pill li a:hover {
@@ -179,8 +181,9 @@ body {
 .menu-pill li a.active {
     background: #ffc107;
     color: #1e3c72;
-    font-weight: bold;
+    font-weight: 700;
 }
+
 /* Paksa warna teks di dalam card */
 .card {
     color: #111; /* default hitam */
