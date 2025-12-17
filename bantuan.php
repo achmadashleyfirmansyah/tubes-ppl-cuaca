@@ -101,80 +101,6 @@ h1{
     margin-top:0;
 }
 
-/* ================= LIVE CHAT ================= */
-.chat-btn{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-    background:#ffcc00;
-    color:#000;
-    border:none;
-    padding:14px 18px;
-    border-radius:50px;
-    cursor:pointer;
-    font-weight:600;
-}
-
-.chat-box{
-    position:fixed;
-    bottom:90px;
-    right:25px;
-    width:320px;
-    background:#1f3b70;
-    border-radius:16px;
-    display:none;
-    flex-direction:column;
-    overflow:hidden;
-}
-
-.chat-header{
-    background:#ffcc00;
-    color:#000;
-    padding:12px;
-    font-weight:600;
-}
-
-.chat-messages{
-    padding:12px;
-    height:260px;
-    overflow-y:auto;
-    font-size:14px;
-}
-
-.msg{
-    margin-bottom:10px;
-}
-.bot{
-    background:rgba(255,255,255,.15);
-    padding:8px 12px;
-    border-radius:12px;
-    display:inline-block;
-}
-.user{
-    background:#ffcc00;
-    color:#000;
-    padding:8px 12px;
-    border-radius:12px;
-    display:inline-block;
-    float:right;
-}
-
-.chat-input{
-    display:flex;
-    border-top:1px solid rgba(255,255,255,.2);
-}
-.chat-input input{
-    flex:1;
-    padding:10px;
-    border:none;
-    outline:none;
-}
-.chat-input button{
-    background:#ffcc00;
-    border:none;
-    padding:10px 16px;
-    cursor:pointer;
-}
 
 /* ================= FOOTER ================= */
 .footer{
@@ -222,11 +148,6 @@ h1{
                 </a>
             </li>
             <li>
-                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
-                    <i class="fas fa-cog"></i> Pengaturan
-                </a>
-            </li>
-            <li>
                 <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
                     <i class="fas fa-question-circle"></i> Bantuan
                 </a>
@@ -259,21 +180,6 @@ h1{
         </div>
     </div>
 </div>
-
-<!-- ================= LIVE CHAT ================= -->
-<button class="chat-btn" onclick="toggleChat()">💬 Live Chat</button>
-
-<div class="chat-box" id="chatBox">
-    <div class="chat-header">Bantuan Cuaca</div>
-    <div class="chat-messages" id="messages">
-        <div class="msg"><div class="bot">Halo 👋 Ada yang bisa kami bantu?</div></div>
-    </div>
-    <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Ketik pesan...">
-        <button onclick="sendMsg()">Kirim</button>
-    </div>
-</div>
-
 <div class="footer">
     © <?= date('Y') ?> Cuaca Indonesia
 </div>
