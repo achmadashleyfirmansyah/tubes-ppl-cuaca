@@ -721,12 +721,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </div>
 
         <div class="forecast-tabs">
-            <button class="tab-btn">Per jam</button>
             <button class="tab-btn active">Gambaran umum</button>
-            <button class="tab-btn">Curah hujan</button>
-            <button class="tab-btn">Angin</button>
-            <button class="tab-btn">Kualitas Udara</button>
-            <button class="tab-btn">Kelembapan</button>
         </div>
 
         <div class="forecast-grid">
@@ -986,15 +981,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <?= addslashes($weatherInfo['desc']) ?>
     `).openPopup();
 
-    // Klik map untuk pindah lokasi
+  // ✅ KLIK MAP → PINDAH HALAMAN TANPA POPUP BROWSER
     map.on('click', function(e) {
         const lat = e.latlng.lat.toFixed(4);
         const lon = e.latlng.lng.toFixed(4);
 
-        if (confirm('Lihat cuaca di lokasi ini?')) {
-            window.location.href =
-                `index.php?lat=${lat}&lon=${lon}&location=Koordinat ${lat}, ${lon}`;
-        }
+        window.location.href =
+            `index.php?lat=${lat}&lon=${lon}&location=Koordinat ${lat}, ${lon}`;
     });
 </script>
 
