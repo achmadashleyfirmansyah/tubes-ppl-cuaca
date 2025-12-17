@@ -227,11 +227,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <i class="fas fa-newspaper"></i> Berita
                 </a>
             </li>
-            <li>
-                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
-                    <i class="fas fa-cog"></i> Pengaturan
-                </a>
-            </li>
+
             <li>
                 <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
                     <i class="fas fa-question-circle"></i> Bantuan
