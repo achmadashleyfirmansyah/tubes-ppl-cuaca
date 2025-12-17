@@ -1,10 +1,12 @@
 <?php
 session_start();
 require_once 'config.php';
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <meta charset="UTF-8">
 <title>Bantuan | Cuaca Indonesia</title>
 
@@ -19,67 +21,56 @@ body{
 
 /* ================= NAVBAR (SAMA SEPERTI ASLI) ================= */
 .topbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:16px 30px;
+    width:100%;
+    margin-bottom:25px;
 }
 
 .topbar-left{
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:30px;
 }
 
 .brand{
-    font-size:18px;
-    font-weight:600;
+    font-size:22px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
 .menu-pill{
     list-style:none;
     display:flex;
     gap:10px;
-    padding:0;
-    margin:0;
+    padding:6px;
+    background:rgba(255,255,255,.08);
+    border-radius:40px;
 }
 
 .menu-pill li a{
     display:flex;
     align-items:center;
-    gap:6px;
-    padding:8px 16px;
-    border-radius:20px;
+    gap:8px;
+    padding:10px 18px;
+    border-radius:30px;
     text-decoration:none;
     font-size:14px;
     color:#fff;
-    background:rgba(255,255,255,.15);
+    transition:.25s;
 }
 
-.menu-pill li a.active,
 .menu-pill li a:hover{
-    background:#ffcc00;
-    color:#000;
+    background:rgba(255,255,255,.18);
 }
 
-.search-nav{
-    position:relative;
-}
-.search-nav input{
-    padding:10px 40px 10px 16px;
-    border:none;
-    border-radius:25px;
-    outline:none;
-}
-.search-nav i{
-    position:absolute;
-    right:14px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#555;
+.menu-pill li a.active{
+    background:#ffc107;
+    color:#1e3c72;
+    font-weight:bold;
 }
 
-/* ================= CONTENT ================= */
+/* ================ CONTENT ================= */
 .container{
     max-width:1100px;
     margin:30px auto;
@@ -200,20 +191,47 @@ h1{
 <!-- ================= NAVBAR ================= -->
 <nav class="topbar">
     <div class="topbar-left">
-        <div class="brand">☁️ Cuaca Indonesia</div>
-        <ul class="menu-pill">
-            <li><a href="index.php">Beranda</a></li>
-            <li><a href="detail.php">Detail</a></li>
-            <li><a href="berita.php">Berita</a></li>
-            <li><a href="pengaturan.php">Pengaturan</a></li>
-            <li><a href="bantuan.php" class="active">Bantuan</a></li>
-        </ul>
-    </div>
-    <div class="topbar-right">
-        <div class="search-nav">
-            <input type="text" placeholder="Cari kota atau lokasi...">
-            <i class="fas fa-search"></i>
+        <div class="brand">
+            ☁️ <span>Cuaca Indonesia</span>
         </div>
+
+        <ul class="menu-pill">
+            <li>
+                <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
+                    <i class="fas fa-house"></i> Beranda
+                </a>
+            </li>
+            <li>
+                <a href="prakiraan.php" class="<?= $currentPage == 'prakiraan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-calendar-days"></i> Prakiraan
+                </a>
+            </li>
+            <li>
+                <a href="peta.php" class="<?= $currentPage == 'peta.php' ? 'active' : '' ?>">
+                    <i class="fas fa-map"></i> Peta
+                </a>
+            </li>
+            <li>
+                <a href="detail.php" class="<?= $currentPage == 'detail.php' ? 'active' : '' ?>">
+                    <i class="fas fa-circle-info"></i> Detail
+                </a>
+            </li>
+            <li>
+                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
+                    <i class="fas fa-newspaper"></i> Berita
+                </a>
+            </li>
+            <li>
+                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
+            <li>
+                <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-question-circle"></i> Bantuan
+                </a>
+            </li>
+        </ul>
     </div>
 </nav>
 
