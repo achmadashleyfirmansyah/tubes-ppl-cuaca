@@ -51,6 +51,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <meta charset="UTF-8">
 <title>Pengaturan Pengguna</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -142,19 +143,51 @@ body {
 
 <body>
 <nav class="topbar">
-<div class="topbar-left">
-    <div class="brand">☁️ Cuaca Indonesia</div>
-    <ul class="menu-pill">
-        <li><a href="index.php">Beranda</a></li>
-        <li><a href="prakiraan.php">Prakiraan</a></li>
-        <li><a href="peta.php">Peta</a></li>
-        <li><a href="detail.php">Detail</a></li>
-        <li><a href="news.php">Berita</a></li>
-        <li><a href="pengaturan.php" class="active">Pengaturan</a></li>
-        <li><a href="bantuan.php">Bantuan</a></li>
-    </ul>
-</div>
+    <div class="topbar-left">
+        <div class="brand">
+            ☁️ <span>Cuaca Indonesia</span>
+        </div>
+
+        <ul class="menu-pill">
+            <li>
+                <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
+                    <i class="fas fa-house"></i> Beranda
+                </a>
+            </li>
+            <li>
+                <a href="prakiraan.php" class="<?= $currentPage == 'prakiraan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-calendar-days"></i> Prakiraan
+                </a>
+            </li>
+            <li>
+                <a href="peta.php" class="<?= $currentPage == 'peta.php' ? 'active' : '' ?>">
+                    <i class="fas fa-map"></i> Peta
+                </a>
+            </li>
+            <li>
+                <a href="detail.php" class="<?= $currentPage == 'detail.php' ? 'active' : '' ?>">
+                    <i class="fas fa-circle-info"></i> Detail
+                </a>
+            </li>
+            <li>
+                <a href="news.php" class="<?= $currentPage == 'news.php' ? 'active' : '' ?>">
+                    <i class="fas fa-newspaper"></i> Berita
+                </a>
+            </li>
+            <li>
+                <a href="pengaturan.php" class="<?= $currentPage == 'pengaturan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </li>
+            <li>
+                <a href="bantuan.php" class="<?= $currentPage == 'bantuan.php' ? 'active' : '' ?>">
+                    <i class="fas fa-question-circle"></i> Bantuan
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
+
 
 <div class="container">
 

@@ -43,10 +43,14 @@ $labels = array_slice($hourly['time'], 0, 12);
 $temp   = array_slice($hourly['temperature_2m'], 0, 12);
 $rain   = array_slice($hourly['precipitation_probability'], 0, 12);
 ?>
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <meta charset="UTF-8">
 <title>Detail Cuaca</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -217,6 +221,7 @@ h2 {
         </ul>
     </div>
 </nav>
+
 
 <div class="container">
     <h2>Detail Cuaca</h2>

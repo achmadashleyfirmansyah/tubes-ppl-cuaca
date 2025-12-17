@@ -208,14 +208,14 @@ body {
 
 </style>
 </head>
-
 <body>
+
 <nav class="topbar">
     <div class="topbar-left">
         <div class="brand">
+
             ☁️ <span>Cuaca Indonesia</span>
         </div>
-
         <ul class="menu-pill">
             <li>
                 <a href="index.php" class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
@@ -255,9 +255,7 @@ body {
         </ul>
     </div>
 </nav>
-
-
-
+<div class="container">
     <div class="card-grid">
         <?php if (empty($data)): ?>
             <p>Tidak ada berita tersedia.</p>

@@ -1,6 +1,6 @@
 {
-    "auto_location": "1",
-    "default_city": "Kediri, Jawa Timur",
+    "auto_location": "0",
+    "default_city": "surabaya",
     "latitude": "-7.8167",
     "longitude": "112.0167",
     "temperature_unit": "c",
